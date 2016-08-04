@@ -16,5 +16,29 @@
   "bugs": {
     "url": "https://github.com/kakorcal/react_express_webpack/issues"
   },
-  "homepage": "https://github.com/kakorcal/react_express_webpack#readme"
+  "homepage": "https://github.com/kakorcal/react_express_webpack#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "knex": "^0.11.9",
+    "lodash": "^4.14.1",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0",
+    "pg": "^6.0.3",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-merge": "^0.14.1",
+    "webpack-validator": "^2.2.7"
+  }
 }
