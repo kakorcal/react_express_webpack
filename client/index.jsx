@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './base.scss';
+require('./base.scss');
 
 const App = React.createClass({
   render(){
