@@ -7,22 +7,35 @@ const path = require('path');
 
 const PATHS = {
   app: path.join(__dirname, 'client', 'index.jsx'),
-  build: path.join(__dirname, 'build'),
-  style: [
-    path.join(__dirname, 'node_modules/bootstrap/dist/css', 'bootstrap.css'),
-    path.join(__dirname, 'client', 'main.css')
-  ]
+  build: path.join(__dirname, 'build')
 }
 
 const common = {
-
+  entry: {
+    app: PATHS.app
+  },
+  output: {
+    path: PATHS.build,
+    filename: '[name].js'
+  },
+  resolve:{
+    extensions: ['', '.js', '.jsx']
+  }
 };
 
 var config;
 switch(process.env.npm_lifecycle_event){
   case 'build':
+    console.log('BUILDING BUNDLE');
+    config = merge(
+      common,
+      {devtool: 'source-map'},
+      parts.clean(PATHS.build)
+    );
     break;
   default:
+    console.log('START EXPRESS SERVER');
+    
 }
 
 module.exports = validate(config, {quiet: true});
