@@ -22,22 +22,22 @@ if(process.env.NODE_ENV !== 'production'){
   app.use(require('webpack-hot-middleware')(complier));  
 }
 
-app.use(express.static(path.join(__dirname, '../build')))
+app.use(express.static(path.join(__dirname, '../build')));
 
 app.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname, '../build/index.html'))
 });
 
-app.use((req, res, next)=>{
-  const err = new Error('Oops!!');
-  err.status = 404;
-  next(err);
-});
+// app.use((req, res, next)=>{
+//   const err = new Error('Oops!!');
+//   err.status = 404;
+//   next(err);
+// });
 
-app.use((err, req, res)=>{
-  res.status(err.status || 500);
-  res.end(JSON.stringify({message: err.message, error: {}}));
-});
+// app.use((err, req, res)=>{
+//   res.status(err.status || 500);
+//   res.end(JSON.stringify({message: err.message, error: {}}));
+// });
 
 app.listen(PORT, (err)=>{
   if(err) console.log(err);

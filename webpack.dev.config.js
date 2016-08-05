@@ -25,6 +25,15 @@ const config = {
         query: {
           presets: ['react-hmre']
         }
+      },
+      {
+        loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
+        test: /\.s?css$/,
+        include: path.join(__dirname, 'client')
+      },
+      {
+        loader: 'file?name=[path][name].[ext]',
+        test: /\.(eot|svg|ttf|woff|woff2)$/
       }
     ]
   },
