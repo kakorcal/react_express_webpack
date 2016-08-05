@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const pkg = require('./package.json');
 const parts = require('./webpack.parts.js');
 const path = require('path');
@@ -20,7 +21,13 @@ const common = {
   },
   resolve:{
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(__dirname, 'client', 'index.html')
+    })
+  ]
 };
 
 var config;
@@ -30,12 +37,16 @@ switch(process.env.npm_lifecycle_event){
     config = merge(
       common,
       {devtool: 'source-map'},
+      parts.setupBabel(PATHS.app),
       parts.clean(PATHS.build)
     );
     break;
   default:
     console.log('START EXPRESS SERVER');
-    
+    config = merge(
+      common,
+      {devtool: 'eval-source-map'}
+    );
 }
 
 module.exports = validate(config, {quiet: true});
