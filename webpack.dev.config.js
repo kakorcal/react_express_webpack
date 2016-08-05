@@ -1,28 +1,43 @@
 const webpack = require('webpack');
+const validate = require('webpack-validator');
 const path = require('path');
 
-module.exports = {
-  entry: {
-    app: path.join(__dirname, 'client', 'index')
-  },
+const config = {
+  entry: [
+    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr', 
+    path.join(__dirname, 'client', 'index.jsx')
+  ],
   output:{
     publicPath: '/',
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
-  resolve: ['', 'js', 'jsx'],
+  devtool: 'eval-source-map',
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
       {
         loader: 'babel',
         test: /\.jsx?$/,
-        include: path.join(__dirname, 'client')
+        include: path.join(__dirname, 'client'),
+        query: {
+          presets: ['react-hmre']
+        }
       }
     ]
-  }
+  },
+  devServer: {
+    contentBase: './build',
+    historyApiFallback: true,
+    hot: true
+  },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 };
+
+module.exports = validate(config);

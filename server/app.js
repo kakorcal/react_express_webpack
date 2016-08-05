@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 3000;
 // const routes = require('./api/index');
 
 app.use(require('morgan')('dev'));
@@ -22,12 +22,13 @@ if(process.env.NODE_ENV !== 'production'){
   app.use(require('webpack-hot-middleware')(complier));  
 }
 
-eval(require('locus'));
-app.use(express.static(path.resolve(__dirname, 'build')))
+app.use(express.static(path.join(__dirname, '../build')))
 
-app.get('*', (req, res)=>{
-  res.sendFile(path.resolve(__dirname, '/build/index.html'))
-})
+app.get('/', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'))
+});
+
+
 
 app.listen(PORT, (err)=>{
   if(err) console.log(err);
