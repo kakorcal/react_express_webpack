@@ -24,7 +24,7 @@ const common = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: 'app.html',
       template: path.join(__dirname, 'client', 'index.html')
     })
   ]
@@ -37,8 +37,17 @@ switch(process.env.npm_lifecycle_event){
     config = merge(
       common,
       {devtool: 'source-map'},
+      {
+        output: {
+          // TODO: Will need a publicPath later on for deployment
+          path: PATHS.build,
+          filename: '[name].[chunkhash].js',
+          chunkFilename: '[chunkhash].js'
+        }
+      }
       parts.setupBabel(PATHS.app),
-      parts.clean(PATHS.build)
+      parts.clean(PATHS.build),
+      parts.minify()
     );
     break;
   default:
