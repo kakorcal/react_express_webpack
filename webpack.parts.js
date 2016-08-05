@@ -11,6 +11,29 @@ exports.clean = function(path){
   }
 };
 
+exports.minify = function(){
+  return {
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
+      })
+    ]
+  }
+};
+
+exports.setFreeVariable = function(key, value){
+  const env = {};
+  env[key] = JSON.stringify(value);
+
+  return {
+    plugins: [
+      new webpack.DefinePlugin(env)
+    ]
+  }
+};
+
 exports.setupBabel = function(paths){
   return {
     module: {
@@ -25,14 +48,16 @@ exports.setupBabel = function(paths){
   };
 };
 
-exports.minify = function(){
+exports.extractFromBundle = function(options){
+  const entry = {};
+  entry[options.name] = options.entries;
+
   return {
+    entry: entry,
     plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
+      new webpack.optimize.CommonsChunkPlugin({
+        name: [options.name, 'manifest']
       })
-    ]
+    ]  
   }
 };

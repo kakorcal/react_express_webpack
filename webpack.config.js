@@ -24,7 +24,7 @@ const common = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'app.html',
+      filename: 'index.html',
       template: path.join(__dirname, 'client', 'index.html')
     })
   ]
@@ -44,7 +44,12 @@ switch(process.env.npm_lifecycle_event){
           filename: '[name].[chunkhash].js',
           chunkFilename: '[chunkhash].js'
         }
-      }
+      },
+      parts.extractFromBundle({
+        name: 'vendor',
+        entries: ['react', 'react-dom']
+      }),
+      parts.setFreeVariable('process.env.NODE_ENV', 'production'),
       parts.setupBabel(PATHS.app),
       parts.clean(PATHS.build),
       parts.minify()
