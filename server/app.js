@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 if(process.env.NODE_ENV !== 'production'){
   const webpack = require('webpack');
-  const config = require('../webpack.config');
+  const config = require('../webpack.dev.config');
   const complier = webpack(config);
 
   app.use(require('webpack-dev-middleware')(complier, {
@@ -22,6 +22,7 @@ if(process.env.NODE_ENV !== 'production'){
   app.use(require('webpack-hot-middleware')(complier));  
 }
 
+eval(require('locus'));
 app.use(express.static(path.resolve(__dirname, 'build')))
 
 app.get('*', (req, res)=>{
