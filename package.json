@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/kakorcal/react_express_webpack#readme",
   "dependencies": {
+    "axios": "^0.13.1",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "express": "^4.14.0",
@@ -28,7 +29,8 @@
     "morgan": "^1.7.0",
     "pg": "^6.0.3",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react-dom": "^15.3.0",
+    "react-router": "^2.6.1"
   },
   "devDependencies": {
     "babel-core": "^6.13.1",
