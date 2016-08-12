@@ -1,7 +1,7 @@
-const users = require('../mock/USERS.json');
-const robotList = require('../mock/ROBOTS.json');
+import users from '../mock/USERS.json'
+import robotList from '../mock/ROBOTS.json'
 
-exports.seed = function(knex, Promise) {
+export function seed(knex, Promise) {
   return knex('users').del()
     .then(() => {
       return knex('users').insert(users).returning('id');

@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+export function up(knex, Promise) {
   return knex.schema.createTable('robots', table => {
     table.increments();
     table.integer('user_id').index().notNullable().references('users.id').onDelete('CASCADE');
@@ -7,6 +7,6 @@ exports.up = function(knex, Promise) {
   });  
 };
 
-exports.down = function(knex, Promise) {
+export function down(knex, Promise) {
   return knex.schema.dropTable('robots');
 };

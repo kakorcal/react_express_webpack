@@ -3,7 +3,7 @@ A simple React/Redux example app using RESTful routing, express server, and webp
 
 Todos:
   * ~~Add database (resources - user, robots)~~
-  * Enable es6/es7 on node
+  * ~~Enable es6/es7 on node~~
   * Use Redux Thunks
   * Use Proptypes
   * Use React Router
