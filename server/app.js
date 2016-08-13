@@ -31,7 +31,7 @@ if(env !== 'production'){
 }
 
 app.use('/api/users', routes.users);
-app.use('/api/users/:id/robots', routes.robots);
+app.use('/api/users/:user_id/robots', routes.robots);
 
 app.get('/', (req, res)=>{
   res.sendFile(entryPoint);
