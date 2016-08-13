@@ -1,7 +1,7 @@
 import webpack from 'webpack'
 import path from 'path'
 
-const dev = {
+export default {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
@@ -19,7 +19,7 @@ const dev = {
   module: {
     loaders: [
       {
-        loader: 'babel-loader',
+        loader: 'babel',
         test: /\.jsx?$/,
         include: /client/
       },
@@ -31,10 +31,8 @@ const dev = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin({multiStep: true}),
     new webpack.NoErrorsPlugin()
   ]
 };
-
-export default dev
