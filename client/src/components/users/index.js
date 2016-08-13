@@ -1,17 +1,15 @@
 import React, {Component} from 'react'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
+import actions from '../../redux/actions'
 
 class UserIndex extends Component{
-  constructor(props){
-    super(props);
-    this.state = {users: []};
-  }
   componentWillMount(){
-    
+    this.props.actions.getUsers();
   }
   render(){
-    const users = this.state.users.map((user, idx)=>{
+    const users = this.props.users.map((user, idx)=>{
       return (
         <li key={idx}>
           <p>{user.id}. <Link to={`/users/${user.id}`}>{user.first_name} {user.last_name}</Link></p>
@@ -33,4 +31,14 @@ class UserIndex extends Component{
   }
 }
 
-export default connect((state)=>state)(UserIndex);
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserIndex);
