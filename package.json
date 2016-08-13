@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node ./server/app.js",
+    "debug": "babel-node-debug ./server/app.js",
     "build": "babel ./server --out-dir ./dist/server",
-    "//": "Alternative to using && in the start command, you can use prestart, which always runs before start",
     "//": "npm start will be used in production",
     "start": "npm run build && node ./dist/server/app.js"
   },
@@ -39,6 +39,7 @@
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.1",
     "babel-loader": "^6.2.4",
+    "babel-node-debug": "^2.0.0",
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
