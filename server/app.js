@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import path from 'path'
+import routes from './routes/index'
 import morgan from 'morgan'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -28,6 +29,9 @@ if(env !== 'production'){
   }));
   app.use(webpackHotMiddleware(compiler));
 }
+
+app.use('/api/users', routes.users);
+app.use('/api/users/:id/robots', routes.robots);
 
 app.get('/', (req, res)=>{
   res.sendFile(entryPoint);
