@@ -5,7 +5,7 @@ import {Link} from 'react-router'
 import actions from '../../redux/actions'
 
 class UserIndex extends Component{
-  componentWillMount(){
+  componentDidMount(){
     this.props.actions.getUsers();
   }
   render(){

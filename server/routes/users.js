@@ -35,7 +35,7 @@ router.put('/:id', (req, res)=>{
 
 router.delete('/:id', (req, res)=>{
   knex('users').where('id', +req.params.id).del().then(()=>{
-    res.send('User Deleted');
+    res.send(req.params.id);
   });
 });
 

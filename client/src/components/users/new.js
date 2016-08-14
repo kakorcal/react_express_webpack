@@ -1,8 +1,36 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router'
-import axios from 'axios'
+import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import {Link, browserHistory} from 'react-router'
+import actions from '../../redux/actions'
 
-export default class UserNew extends Component{
+class UserNew extends Component{
+  // static contextTypes = {
+  //   router: PropTypes.object
+  // };
+
+  constructor(props){
+    super(props);
+    this.state = {
+      gender: true
+    }
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    let first_name = ReactDOM.findDOMNode(this.refs.first).value;
+    let last_name = ReactDOM.findDOMNode(this.refs.last).value;
+    let gender = this.state.gender ? 'Male' : 'Female';
+    this.props.actions.newUser({first_name, last_name, gender}).then(()=>{
+      browserHistory.push('/');
+    });
+  }
+
+  handleGenderChange(e){
+    this.setState({gender: !this.state.gender});
+  }
+
   render(){
     return (
       <div>
@@ -11,23 +39,23 @@ export default class UserNew extends Component{
           <button><Link to='/users'>Go Back</Link></button>
         </div>      
         <div>
-          <form>
+          <form onSubmit={this.handleSubmit.bind(this)}>
             <div> 
               <label htmlFor="first_name">First Name: </label>
-              <input id='first_name' type="text"/>
+              <input ref='first' id='first_name' type="text"/>
             </div>
             <div>
               <label htmlFor="last_name">Last Name: </label>
-              <input id='last_name' type="text"/>
+              <input ref='last' id='last_name' type="text"/>
             </div>
             <div>
               <label className="form-label">Gender: </label>
               <label className="form-radio">
-                  <input type="radio" name="gender" checked={true}/>
+                  <input type="radio" name="gender" onChange={this.handleGenderChange.bind(this)} checked={this.state.gender}/>
                   <i className="form-icon"></i> Male
               </label>
               <label className="form-radio">
-                  <input type="radio" name="gender" />
+                  <input type="radio" name="gender" onChange={this.handleGenderChange.bind(this)} checked={!this.state.gender}/>
                   <i className="form-icon"></i> Female
               </label>
             </div>
@@ -38,3 +66,15 @@ export default class UserNew extends Component{
     );
   }
 }
+
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch, action){
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserNew);
